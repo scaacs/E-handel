@@ -24,17 +24,14 @@ namespace Project2___E_handel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Product> products = new List<Product>();
-            products.Add(new Product("Tandborste", "299", "1"));
-            products.Add(new Product("Tandtråd", "49", "2"));
-            products.Add(new Product("Tandställning", "999", "3"));
+            List<Products> products = SQL.GetAllProducts();
 
             string table = "<table><thead><tr><th>Artikelnummer</th><th>Produktnamn</th><th>Pris</th><th></th></tr></thead><tbody>";
 
             for (int i = 0; i < products.Count; i++)
             {
-                string buyButton = $"<td><input type='button' onclick=\"AddToCart({ products[i].ID}, '{products[i].Name}', {products[i].Price});\" value='Köp' /></td>";
-                table += $"<tr><td>{products[i].ID}</td><td>{products[i].Name}</td><td>{products[i].Price}</td>"+buyButton+"</tr>";
+                string buyButton = $"<td><input type='button' onclick=\"AddToCart({ products[i].ArticleNr}, '{products[i].ProductName}', {products[i].Price});\" value='Köp' /></td>";
+                table += $"<tr><td>{products[i].ArticleNr }</td><td>{products[i].ProductName}</td><td>{products[i].Price}</td>"+buyButton+"</tr>";
             }
 
             table += "</tbody></table>";
