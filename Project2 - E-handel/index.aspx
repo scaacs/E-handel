@@ -44,12 +44,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <div id="products" class="table table-hover">
                     <asp:Literal ID="Products" runat="server"></asp:Literal>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
+                <p style="padding:50px"></p>
+            </div>
+            <div class="col-lg-4">
                 <div class="table">
                     <table>
                         <thead>
