@@ -6,20 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Project2___E_handel
-{
-    public class Product
-    {
-        public string Name { get; set; }
-        public string Price { get; set; }
-        public string ID { get; set; }
-
-        public Product(string name, string price, string id)
-        {
-            Name = name;
-            Price = price;
-            ID = id;
-        }
-    }
+{ 
     public partial class index : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)

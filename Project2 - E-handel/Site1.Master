@@ -16,9 +16,9 @@
     <form id="form1" runat="server">
         <div>
             <div class="jumbotron">
-  <h1>E-handelssidan</h1>      
-  <p>Detta är en sida där man kan lägga saker i en kundvagn och sen betala för dem</p>
-</div>
+                <h1>E-handelssidan</h1>      
+                 <p>Detta är en sida där man kan lägga saker i en kundvagn och sen betala för dem</p>
+            </div>
 
 
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

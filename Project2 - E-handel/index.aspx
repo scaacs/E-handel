@@ -3,9 +3,36 @@
     <script>
          
         $(function () {
-            
+            $("#cart").html(localStorage.cart);
+            $("tfoot").html(localStorage.footer);
+            totalPrice = localStorage.sum ? parseFloat(localStorage.sum) : 0;
+
+            $("#admin").click(function () {
+                if ($("#password").val() == "abc123") {
+                    open("https://www.google.se/");
+                }
+            });
+
+            $("#pay").click(function () {
+                var fullOrder = [];
+                var productData = $("#cart td");
+                for (var i = 0; i < productData.length; i++) {
+                    var obj = { "itemNR": productData[i++].innerText, "itemName": productData[i++].innerText, "itemPrice": productData[i++].innerText, "itemQuant": productData[i++].innerText };
+                    fullOrder.push(obj);
+                }
+                //fullOrder.push({ "totalPrice": totalPrice });
+                var myJSON = JSON.stringify(fullOrder);
+
+                $.ajax({
+                    method: "POST",
+                    url: "",
+                    data: {action: "payment", productInfo: myJSON }
+                }).done
+
+            });
         });
         var totalPrice = 0;
+        
         function AddToCart(itemNR, itemName, itemPrice) {
             var antal = $("#cart td:first-child").text();
             var isNotExisting = true;
@@ -24,6 +51,9 @@
            
             totalPrice += parseFloat(itemPrice);
             $("tfoot td:eq(1)").text(totalPrice + " kr");
+            localStorage.cart = $("#cart").html();
+            localStorage.footer = $("tfoot").html();
+            localStorage.sum = totalPrice;
         }
 
         function RemoveItem(nr) {
@@ -38,21 +68,26 @@
                     $("tfoot td:eq(1)").text(totalPrice + " kr");
                 }
             }
+            localStorage.cart = $("#cart").html();
+            localStorage.footer = $("tfoot").html();
+            localStorage.sum = totalPrice;
+            
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
+         
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 <div id="products" class="table table-hover">
                     <asp:Literal ID="Products" runat="server"></asp:Literal>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
                 <p style="padding:50px"></p>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 <div class="table">
                     <table>
                         <thead>
@@ -64,9 +99,18 @@
                         <tfoot>
                             <tr><td colspan="2">Totalsumma</td><td colspan="2"></td><td></td></tr>
                         </tfoot>
-                        
                     </table>
+                    <br />
+                    <input type="button" value="Betala" id="pay" style="margin-left:375px"/>
                 </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:150px">
+             <div class="col-lg-8">
+             </div>
+            <div class="col-lg-4">
+                <input type="password" id="password"/>
+                <input type="button" value="Admin" id="admin"/>
             </div>
         </div>
     </div>
