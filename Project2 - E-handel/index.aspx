@@ -9,7 +9,7 @@
 
             $("#admin").click(function () {
                 if ($("#password").val() == "abc123") {
-                    open("https://www.google.se/");
+                    open("Admin.aspx");
                 }
             });
 
@@ -26,8 +26,19 @@
                 $.ajax({
                     method: "POST",
                     url: "",
-                    data: {action: "payment", productInfo: myJSON }
-                }).done
+                    data: { action: "payment", productInfo: myJSON }
+                }).done(function (data) {
+                    var incomming = JSON.parse(data);
+                    if (incomming.status == "ok") {
+                        localStorage.clear();
+                        open("");
+                    }
+                    else {
+                        alert("Något gick fel");
+                    }
+                }).fail(function () {
+                    alert("Oj! Något gick fel!")
+                });
 
             });
         });
