@@ -10,6 +10,24 @@
 namespace Project2___E_handel {
     
     
-    public partial class Admin {
+    public partial class Payment {
+        
+        /// <summary>
+        /// numberOfItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal numberOfItems;
+        
+        /// <summary>
+        /// cart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal cart;
     }
 }

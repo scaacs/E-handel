@@ -1,28 +1,20 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Payment.aspx.cs" Inherits="Project2___E_handel.Admin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Payment.aspx.cs" Inherits="Project2___E_handel.Payment" %>
 
 
-<!doctype html>
-<html lang="en">
-<head>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Betalning</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script>
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- Custom styles for this template -->
+</script>
     <link href="form-validation.css" rel="stylesheet">
-</head>
+</asp:Content>
 
-<body class="bg-light">
+<asp:Content ContentPlaceHolderID="main" runat="server">
 
     <div class="container">
         <div class="py-5 text-center">
@@ -32,27 +24,14 @@
 
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Din kundvagn</span>
-                    <span class="badge badge-secondary badge-pill">3</span>
-                </h4>
+                <asp:Literal ID="numberOfItems" runat="server"></asp:Literal>
                 <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">Produktnamn</h6>
-                            <small class="text-muted">Kort beskrivning</small>
-                        </div>
-                        <span class="text-muted">$12</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$20</strong>
-                    </li>
+                    <asp:Literal ID="cart" runat="server"></asp:Literal>
                 </ul>
 
                 <form class="card p-2">
                     <div class="input-group">
-                        <input type="hidden" class="form-control" placeholder="rabattkod">
+                        <input type="text" class="form-control" placeholder="rabattkod">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-secondary">Lös in rabatt</button>
                         </div>
@@ -62,9 +41,8 @@
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Faktureringsadress</h4>
-                <form method="post" class="needs-validation" novalidate>
-                    <input type="hidden" name="action" id="action" value="addOrder" />
-                    <input type="hidden" name="shoppingCart" id="shoppingCart" value="[{Name:'Produkt1', Price: 2}, {Name:'Produkt3', Price: 4}]" />
+                <form method="post" class="needs-validation" novalidate runat="server">
+                    <input type="hidden" name="action" id="action" value="postOrder" />
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">Förnamn</label>
@@ -96,7 +74,7 @@
 
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="du@till_exempel.com">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="du@till_exempel.com" required>
                         <div class="invalid-feedback">
                             Vänligen ange giltlig e-postadress för fraktspårning.
                         </div>
@@ -215,10 +193,13 @@
                                 event.stopPropagation();
                             }
                             form.classList.add('was-validated');
+                            alert("Order lagd!");
+                            localStorage.clear();
+                            open("index.aspx");
+                            close("payment.aspx");
                         }, false);
                     });
                 }, false);
             })();
     </script>
-</body>
-</html>
+</asp:Content>
