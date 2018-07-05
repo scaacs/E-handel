@@ -109,7 +109,7 @@ namespace Project2___E_handel
             SqlParameter DescriptionP = new SqlParameter("@Description", System.Data.SqlDbType.VarChar);
             DescriptionP.Value = description;
             myCommand.Parameters.Add(DescriptionP);
-            
+
             SqlParameter CategoryP = new SqlParameter("@Category", System.Data.SqlDbType.VarChar);
             CategoryP.Value = category;
             myCommand.Parameters.Add(CategoryP);
@@ -168,8 +168,10 @@ namespace Project2___E_handel
             }
             return succes;
         }
-        public static void CreateUser(int security, string firstName, string lastName, string email, string password, string ssn, string street, string zipcode, string city)
+        public static string CreateUser(int security, string firstName, string lastName, string email, string password, string ssn, string street, string zipcode, string city)
         {
+            string ID = "";
+
             SqlConnection myConnection = new SqlConnection(connectionString);
             SqlCommand myCommand = new SqlCommand("AddUser", myConnection);
             myCommand.CommandType = System.Data.CommandType.StoredProcedure;
@@ -210,10 +212,15 @@ namespace Project2___E_handel
             cityP.Value = city;
             myCommand.Parameters.Add(cityP);
 
+            SqlParameter IDP = new SqlParameter("@UserID", System.Data.SqlDbType.VarChar, 150);
+            IDP.Direction = System.Data.ParameterDirection.Output;
+            myCommand.Parameters.Add(IDP);
+
             try
             {
                 myConnection.Open();
                 myCommand.ExecuteNonQuery();
+                ID = Convert.ToString(IDP.Value);
 
             }
             catch (Exception ex)
@@ -224,6 +231,7 @@ namespace Project2___E_handel
             {
                 myConnection.Close();
             }
+            return ID;
 
         }
 
