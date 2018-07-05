@@ -86,5 +86,10 @@ namespace Project2___E_handel
                 ClearAndUpdate();
             }
         }
+
+        protected void ButtonBackToMain_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("index.aspx");
+        }
     }
 }

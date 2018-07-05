@@ -28,4 +28,5 @@
     <asp:Button ID="ButtonCreateProduct" runat="server" OnClick="ButtonCreateProduct_Click" Text="Lägg till produkt" />
     <asp:Button ID="ButtonUpdate" runat="server" OnClick="ButtonUpdate_Click" Text="Uppdatera produkt" />
     <asp:Button ID="ButtonDelete" runat="server" OnClick="ButtonDelete_Click" Text="Ta bort produkt" />
+    <asp:Button ID="ButtonBackToMain" runat="server" OnClick="ButtonBackToMain_Click" Text="Till startsidan" />
 </asp:Content>
